@@ -295,7 +295,9 @@ class Source:
             pattern_dates: list[datetime.date] = []
 
             if len(elements) == 4:
-                # Monthly pattern: [-,-,2,-] means Tuesday on 3rd week of month
+                # Monthly pattern: [-,-,2,-] means 3rd Tuesday of each month.
+                # Uses bysetpos (Nth occurrence) not a rolling 4-week cycle.
+                # Verified with registration 2318337: [-,-,-,3] = Dec 24, 2025 (4th Wed).
                 for i, e in enumerate(elements):
                     if e.isdigit():
                         rule = rrule(
